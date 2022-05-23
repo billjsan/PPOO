@@ -34,7 +34,7 @@ public class TaskWrapper {
         return period;
     }
 
-    public void setPeriod(int period) {
+    public void setPeriodMillisec(int period) {
         this.period = period;
     }
 }

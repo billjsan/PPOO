@@ -12,11 +12,27 @@ public class AlarmCentral implements Observable, Observer {
     private double humiditySensor;
     private boolean presentSensor;
     private String address = "Rua carolina, 55";
+    private String id;
+
+
+    private AlarmCentral(){
+
+    }
+
+    public AlarmCentral(String id, String address) {
+        this.id = id;
+        this.address = address;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     private final List<String> presentMeasurementHistory = new ArrayList<>();
-
-    public AlarmCentral() {
-    }
 
     public String getAddress() {
 
@@ -84,6 +100,6 @@ public class AlarmCentral implements Observable, Observer {
     public void onUpdate(Observable observable) {
 
         System.out.println("[Alarm Central] onUpdate ");
-
+        notifyObservers();
     }
 }

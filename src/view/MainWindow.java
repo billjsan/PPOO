@@ -50,7 +50,8 @@ public class MainWindow extends JFrame {
         botao.setToolTipText(TEXTO_BOTAO);
 
         //cria input
-        seletor = new JSpinner(new SpinnerNumberModel(1,1,200,1));
+        seletor = new JSpinner(new SpinnerNumberModel(1,1,
+                200,1));
         seletor.setMaximumSize(new Dimension(100,50));
 
         //cria parte desenhavel
@@ -175,12 +176,14 @@ public class MainWindow extends JFrame {
 
 //    private static String criptografa(String texto){
 //
-//        return new String(Base64.getEncoder().encode(texto.getBytes(StandardCharsets.UTF_8)));
+//        return new String(Base64.getEncoder().
+//        encode(texto.getBytes(StandardCharsets.UTF_8)));
 //
 //    }
 //
 //    private static String decriptografa(String texto){
-//        return new String(Base64.getDecoder().decode(texto.getBytes(StandardCharsets.UTF_8)));
+//        return new String(Base64.getDecoder()
+//        .decode(texto.getBytes(StandardCharsets.UTF_8)));
 //    }
 //
 

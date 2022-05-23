@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
        //new MainWindow();
+        ObserverTest.ownObserverApp();
 
         /**
          * tests
@@ -15,7 +16,7 @@ public class Main {
         //StrategyTest.strategySortPlay();
         //ObserverTest.onwObserverTimerTest();
 
-        ObserverTest.ownObserverApp();
+        //ObserverTest.ownObserverApp();
        // mainWindow.createWindow();
 
 //        ObservableImpl observable = new ObservableImpl();
