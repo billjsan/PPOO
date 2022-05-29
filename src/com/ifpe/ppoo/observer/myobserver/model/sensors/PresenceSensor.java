@@ -1,13 +1,13 @@
 package com.ifpe.ppoo.observer.myobserver.model.sensors;
 
 import com.ifpe.ppoo.observer.myobserver.model.Observer;
-import com.ifpe.ppoo.observer.myobserver.model.util.Util;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PresenceSensor implements Sensor {
-    private String currentMeasure = "";
+    private String measureValue = "";
     private String currentMeasureResponse = "";
     private final List<Observer> observers = new ArrayList<>();
     private String name;
@@ -44,13 +44,10 @@ public class PresenceSensor implements Sensor {
 
     @Override
     public void measure() {
-        Util.setTimePattern(Util.TIME_SEPARATOR_COMMA);
-        Util.setDatePattern(Util.DATE_SEPARATOR_ASH);
 
-        currentMeasure = Util.measurePresenceSimulate();
-        currentMeasureResponse = "Sensor: " + getName() + " " +
-                currentMeasure + " " +
-                Util.formattedDateAndTime();
+        measureValue = measureSimulation();
+        currentMeasureResponse = " Sensor: [" + getName() + "] Measure: [" +
+                measureValue + "]";
         onSensorMeasurementChanged();
     }
 
@@ -62,7 +59,7 @@ public class PresenceSensor implements Sensor {
 
     @Override
     public String getCurrentMeasurement() {
-        return currentMeasure;
+        return measureValue;
     }
 
     @Override
@@ -76,7 +73,7 @@ public class PresenceSensor implements Sensor {
     @Override
     public void notifyObservers() {
 
-        if (currentMeasure.contains("false")) return;
+        if (measureValue.contains("false")) return;
         System.out.println("[" + getName() + "]: Presence sensor set to [On] Notifying observes ");
         for (Observer obs : observers) {
             obs.onUpdate(this);
@@ -91,5 +88,16 @@ public class PresenceSensor implements Sensor {
     @Override
     public void unregisterObserver(Observer observer) {
         observers.remove(observer);
+    }
+
+    private static String measureSimulation() {
+
+        SecureRandom secureRandom = new SecureRandom();
+        int value = secureRandom.nextInt(2);
+
+        if (value == 0) {
+            return "false";
+        }
+        return "true";
     }
 }
