@@ -7,17 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PresenceSensor implements Sensor {
+
     private String measureValue = "";
     private String currentMeasureResponse = "";
     private final List<Observer> observers = new ArrayList<>();
-    private String name;
-    private String address;
+    private String sensorName;
+    private String sensorAddress;
     private final int id;
     private static int _id = 0;
 
     public PresenceSensor(String name, String address) {
-        this.name = name;
-        this.address = address;
+        this.sensorName = name;
+        this.sensorAddress = address;
         this.id = _id;
         _id++;
     }
@@ -26,34 +27,36 @@ public class PresenceSensor implements Sensor {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getSensorName() {
+        return sensorName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSensorName(String sensorName) {
+        this.sensorName = sensorName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getSensorAddress() {
+        return sensorAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setSensorAddress(String address) {
+        this.sensorAddress = address;
+    }
+
+    private String getMeasureResponse(){
+      return  "Sensor: [" + getSensorName() + "] Measure: [" +
+                measureValue + "]";
     }
 
     @Override
     public void measure() {
-
-        measureValue = measureSimulation();
-        currentMeasureResponse = " Sensor: [" + getName() + "] Measure: [" +
-                measureValue + "]";
+        measureValue = getMeasureSimulation();
+        currentMeasureResponse = getMeasureResponse();
         onSensorMeasurementChanged();
     }
 
     @Override
     public void onSensorMeasurementChanged() {
-        System.out.println(currentMeasureResponse);
         notifyObservers();
     }
 
@@ -65,18 +68,19 @@ public class PresenceSensor implements Sensor {
     @Override
     public String getSensorInformation() {
 
-        return getName() + " " +
-                getAddress() + " id: " +
+        return getSensorName() + " " +
+                getSensorAddress() + " id: " +
                 getId();
     }
 
     @Override
     public void notifyObservers() {
 
+        // use case: only notify when is true (alarm)
         if (measureValue.contains("false")) return;
-        System.out.println("[" + getName() + "]: Presence sensor set to [On] Notifying observes ");
+
         for (Observer obs : observers) {
-            obs.onUpdate(this);
+            obs.onUpdate(PresenceSensor.this);
         }
     }
 
@@ -90,7 +94,7 @@ public class PresenceSensor implements Sensor {
         observers.remove(observer);
     }
 
-    private static String measureSimulation() {
+    private String getMeasureSimulation() {
 
         SecureRandom secureRandom = new SecureRandom();
         int value = secureRandom.nextInt(2);
