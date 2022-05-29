@@ -27,8 +27,8 @@ public class TaskWrapper {
     public TaskWrapper() {
         int id = _wrapperId;
         _wrapperId++;
-        TAG = TaskWrapper.class.getSimpleName() + " " +id;
-        if(Log.ISLOGABLE) Log.d(TAG, "TaskWrapper [" + id + "] instantiate");
+        TAG = TaskWrapper.class.getSimpleName() + " [" + id + "]";
+        if(Log.ISLOGABLE) Log.d(TAG, "TaskWrapper instantiate");
     }
 
     public TimerMeasurementTask getSensor() {
@@ -64,7 +64,6 @@ public class TaskWrapper {
      * @param period
      */
     public void setPeriodMillisecond(int period) {
-        if(Log.ISLOGABLE) Log.d(TAG, "setPeriodMillisecond [" + period + " period]");
 
         int TASK_PERIOD_TIME = 1000;
         if(period == TASK_PERIOD_DEFAULT){
@@ -79,5 +78,6 @@ public class TaskWrapper {
                 this.period = period;
             }
         }
+        if(Log.ISLOGABLE) Log.d(TAG, "setPeriodMillisecond [" + this.period + " period]");
     }
 }
