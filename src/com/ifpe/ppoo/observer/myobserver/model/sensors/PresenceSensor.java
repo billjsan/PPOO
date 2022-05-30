@@ -15,13 +15,13 @@ public class PresenceSensor implements Sensor {
     private String sensorName;
     private String sensorAddress;
     private final int id;
-    private static int _id = 0;
+    private static int _id = 1;
 
     public PresenceSensor(String name, String address) {
         this.sensorName = name;
         this.sensorAddress = address;
         this.id = _id;
-        this.TAG = PresenceSensor.class.getSimpleName() + " [" + getId() + "]";
+        this.TAG = PresenceSensor.class.getSimpleName() + " [" + _id + "]";
         _id++;
         if(Log.ISLOGABLE) Log.d(TAG,"PresenceSensor instantiate");
     }
@@ -61,7 +61,6 @@ public class PresenceSensor implements Sensor {
     public void measure() {
         if(Log.ISLOGABLE) Log.d(TAG,"measure");
         measureValue = getMeasureSimulation();
-        String currentMeasureResponse = getMeasureResponse();
         onSensorMeasurementChanged();
     }
 
@@ -74,7 +73,7 @@ public class PresenceSensor implements Sensor {
     @Override
     public String getCurrentMeasurement() {
         if(Log.ISLOGABLE) Log.d(TAG,"getCurrentMeasurement");
-        return measureValue;
+        return getMeasureResponse();
     }
 
     @Override
