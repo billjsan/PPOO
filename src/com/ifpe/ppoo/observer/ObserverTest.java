@@ -6,16 +6,9 @@ import com.ifpe.ppoo.observer.myobserver.model.Police;
 import com.ifpe.ppoo.observer.myobserver.model.sensors.PresenceSensor;
 
 public class ObserverTest {
-
-    /**
-     * tests if the timer task schedule is working properly
-     */
-    public static void onwObserverTimerTest(){
-
-    }
-
     public static void ownObserverApp(){
         AlarmCentral alarmCentral = new AlarmCentral("Central do will");
+
         alarmCentral.addSensors(new PresenceSensor("1", "porch"));
         alarmCentral.addSensors(new PresenceSensor("2", "kitchen"));
         alarmCentral.addSensors(new PresenceSensor("3", "garage"));

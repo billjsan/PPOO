@@ -14,6 +14,7 @@ public class AlarmCentral implements Observable, Observer {
     private final String TAG;
     private final List<Observer> observers = new ArrayList<>();
     private final List<Sensor> sensors = new ArrayList<>();
+    private Observable lastNotifyingSensor;
 
     public AlarmCentral(String name) {
         TAG = AlarmCentral.class.getSimpleName() + " [" + name + "]";
@@ -30,7 +31,7 @@ public class AlarmCentral implements Observable, Observer {
     public void notifyObservers() {
         if (Log.ISLOGABLE) Log.d(TAG, "notifyObservers");
         for (Observer obs : observers) {
-            obs.onUpdate(this);
+            obs.onUpdate(lastNotifyingSensor);
         }
     }
 
@@ -55,6 +56,7 @@ public class AlarmCentral implements Observable, Observer {
     @Override
     public void onUpdate(Observable observable) {
         if (Log.ISLOGABLE) Log.d(TAG, "onUpdate");
+        lastNotifyingSensor = observable;
         notifyObservers();
     }
 

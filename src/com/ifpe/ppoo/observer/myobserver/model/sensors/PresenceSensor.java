@@ -12,8 +12,8 @@ public class PresenceSensor implements Sensor {
     private final String TAG;
     private String measureValue = "";
     private final List<Observer> observers = new ArrayList<>();
-    private String sensorName;
-    private String sensorAddress;
+    private final String sensorName;
+    private final String sensorAddress;
     private final int id;
     private static int _id = 1;
 
@@ -36,19 +36,9 @@ public class PresenceSensor implements Sensor {
         return sensorName;
     }
 
-    public void setSensorName(String sensorName) {
-        if(Log.ISLOGABLE) Log.d(TAG,"getSensorName [" + sensorName + "]");
-        this.sensorName = sensorName;
-    }
-
     public String getSensorAddress() {
         if(Log.ISLOGABLE) Log.d(TAG,"getSensorAddress [" + this.sensorAddress + "]");
         return sensorAddress;
-    }
-
-    public void setSensorAddress(String address) {
-        if(Log.ISLOGABLE) Log.d(TAG,"setSensorAddress [" + address + "]");
-        this.sensorAddress = address;
     }
 
     private String getMeasureResponse(){
@@ -79,7 +69,7 @@ public class PresenceSensor implements Sensor {
     @Override
     public String getSensorInformation() {
         if(Log.ISLOGABLE) Log.d(TAG,"getSensorInformation");
-        return getSensorName() + " " +
+        return "name: " + getSensorName() + " Address: " +
                 getSensorAddress() + " id: " +
                 getId();
     }
